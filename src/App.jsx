@@ -1,29 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom';
 import './App.css'
 import AboutMe from './pages/AboutMe';
 import Header from './components/Header';
 import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import Resume from './pages/Resume';
+import Footer from './components/Footer';
 
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('AboutMe')
+
+
+const url = useLocation().pathname
+console.log(url)
+
   function render(){
- switch(currentPage){
-  case 'AboutMe': 
+ switch(url){
+  case '/': 
     return <AboutMe />
     break;
 
-    case 'Contact': 
+    case '/contact': 
     return <Contact />
     break;
 
-    case 'Portfolio': 
+    case '/portfolio': 
     return <Portfolio />
     break;
 
-    case 'Resume': 
+    case '/resume': 
     return <Resume />
     break;
  }
@@ -31,8 +37,9 @@ function App() {
 
   return (
     <main>
-<Header setCurrentPage={setCurrentPage}/> 
+<Header /> 
 {render()}
+<Footer />
 </main>
   )
 }
